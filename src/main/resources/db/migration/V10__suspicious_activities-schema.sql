@@ -1,0 +1,21 @@
+CREATE TABLE suspicious_activities (
+    method             VARCHAR(7),
+    application_fk     BIGINT,
+    created_at         TIMESTAMP(6),
+    id                 BIGINT NOT NULL PRIMARY KEY,
+    occurred_at        TIMESTAMP(6) NOT NULL,
+    suspicious_type_fk BIGINT NOT NULL,
+    updated_at         TIMESTAMP(6),
+    user_fk            BIGINT,
+    ip                 VARCHAR(100) NOT NULL,
+    page               VARCHAR(100) NOT NULL,
+    created_by         VARCHAR(255),
+    referer_page       VARCHAR(255) NOT NULL,
+    status             VARCHAR(255) CHECK (status IN ('ACTIVE', 'INACTIVE', 'DELETED', 'PENDING', 'APPROVED', 'REJECTED', 'CANCELED', 'LOCKED')),
+    updated_by         VARCHAR(255),
+    user_agent         VARCHAR(255) NOT NULL,
+    username           VARCHAR(255),
+    CONSTRAINT FK_tbl_organizations_tbl_suspicious_act_col_organization_id FOREIGN KEY (organization_fk) REFERENCES organizations(id),
+    CONSTRAINT FK_tbl_suspicious_type_tbl_suspicious_act_col_suspicious_type FOREIGN KEY (suspicious_type_fk) REFERENCES suspicious_activity_types(id),
+    CONSTRAINT FK_tbl_users_tbl_suspicious_activities_col_user_id FOREIGN KEY (user_fk) REFERENCES users(id)
+);

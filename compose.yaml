@@ -1,0 +1,91 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: hydrogenhr
+      MYSQL_PASSWORD: password@123
+      MYSQL_ROOT_PASSWORD: password@123
+      MYSQL_USER: developer
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "127.0.0.1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - backend
+
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: password@123
+      POSTGRES_DB: vault
+      DB_HOST: 127.0.0.1
+    ports:
+      - "5466:5432"
+    volumes:
+      - ./containers/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U postgres
+    networks:
+      - backend
+
+  foundation-service:
+    container_name: foundation-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8099:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hydrogenhr?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: developer
+      SPRING_DATASOURCE_PASSWORD: password@123
+      SPRING_VAULT_TOKEN: ${SPRING_VAULT_TOKEN}
+      SPRING_CLOUD_VAULT_URI: http://vault:8200
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    restart: always
+    ports:
+      - "8200:8200"
+      - "8300:8300/udp"
+    environment:
+      VAULT_ADDR: http://0.0.0.0:8200
+    cap_add:
+      - IPC_LOCK
+    privileged: true
+    volumes:
+      - ./containers/vault/config.hcl:/vault/config/config.hcl
+      - vault-data:/vault/data
+    depends_on:
+      - mysql
+      - postgres
+    networks:
+      - backend
+    command: server
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  vault-data:
+  postgres_data:
