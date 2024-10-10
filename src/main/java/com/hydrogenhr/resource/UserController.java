@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/dev")
@@ -54,13 +55,13 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    public  ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public  ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser){
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody User updatedUser){
         return  new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
     }
 
