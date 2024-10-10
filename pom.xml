@@ -34,7 +34,15 @@
         <shedlock.version>5.15.0</shedlock.version>
         <guava.version>32.1.2-jre</guava.version>
     </properties>
+
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-envers -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>6.6.1.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -56,6 +57,8 @@ public class SecurityConfig {
                 .formLogin((formLogin -> formLogin.loginPage(LOGIN).permitAll()))
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(ASSETS, LOGIN, SWAGGER, OAUTH2_TOKEN_ENDPOINT).permitAll()
+                        // specific endpoint that will not be authenticated  for test purpose
+                        .requestMatchers("/dev/**").permitAll()
                         .anyRequest().authenticated())
                 .headers((header) -> header
                         .defaultsDisabled()
@@ -67,7 +70,8 @@ public class SecurityConfig {
                         ).contentSecurityPolicy(contentPolicy ->
                                 contentPolicy.policyDirectives(SECURITY_POLICY)
                                         .reportOnly()))
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+//                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .csrf(AbstractHttpConfigurer::disable)
                 .rememberMe(rememberMe -> rememberMe.rememberMeServices(rememberMeService()))
                 .addFilterBefore(new CustomCorsFilter(), ChannelProcessingFilter.class)
                 .build();

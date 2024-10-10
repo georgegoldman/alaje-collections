@@ -35,7 +35,7 @@ spring:
         backend: secret
         default-context: ${spring.application.name}
       uri: http://127.0.0.1:8200
-      token: ${SPRING_VAULT_TOKEN}
+      token: hvs.vSbtJ654IZxfPoz8Cp5aXWGp
       authentication: token
       enabled: false
   lifecycle:

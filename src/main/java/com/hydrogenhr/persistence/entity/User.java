@@ -2,6 +2,8 @@ package com.hydrogenhr.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hydrogenhr.model.enums.AccountType;
+import com.hydrogenhr.model.enums.RegistrationStage;
+import com.hydrogenhr.model.enums.UserType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,6 +23,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -73,6 +76,8 @@ public class User extends BaseEntity {
     @Column(name = "password_reset", length = 1)
     private boolean passwordReset;
 
+    private LocalDate dateOfBirth;
+
     @Column(name = "is_admin", length = 1)
     private boolean isAdmin;
 
@@ -82,6 +87,14 @@ public class User extends BaseEntity {
     @Column(name = "account_type", length = 15)
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
+
+    @Column(name = "user_type")
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    @Column(name = "registration_stage")
+    @Enumerated(EnumType.STRING)
+    private RegistrationStage registrationStage;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_fk")
