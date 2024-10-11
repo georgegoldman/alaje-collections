@@ -101,10 +101,5 @@ public class User extends BaseEntity {
     @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_status", joinColumns =
-    @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns =
-    @JoinColumn(name = "status_id", referencedColumnName = "id"))
-    private Set<Status> status;
 
 }

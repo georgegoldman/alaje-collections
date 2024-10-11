@@ -1,5 +1,6 @@
 package com.hydrogenhr.persistence.entity;
 
+import com.hydrogenhr.model.enums.BusinessType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,24 +8,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name = "SQAnswer")
-@Table(name = "sq_answer")
+@Entity(name = "Business")
+@Table(name = "business")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class SQAnswer extends BaseEntity{
+public class Business extends BaseEntity {
 
-    @Column(name = "answer")
-    private String answer;
+    @Column(name = "business_type")
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
 
-    @JoinColumn(name = "user_fk")
+    @Column(name = "business_description")
+    private String businessDescription;
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_fk")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "security_question_fk")
-    private SecurityQuestion securityQuestion;
-
+    private Address address;
 }
