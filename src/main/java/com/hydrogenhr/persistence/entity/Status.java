@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name="UserStatus")
-@Table(name = "user_status")
+@Entity(name="Status")
+@Table(name = "status")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class UserStatus extends BaseEntity {
+public class Status extends BaseEntity {
 
     @Column(name = "registered")
     private boolean registered;

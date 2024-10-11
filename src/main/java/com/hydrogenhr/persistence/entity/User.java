@@ -4,16 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hydrogenhr.model.enums.AccountType;
 import com.hydrogenhr.model.enums.RegistrationStage;
 import com.hydrogenhr.model.enums.UserType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -109,4 +100,11 @@ public class User extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns =
     @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_status", joinColumns =
+    @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns =
+    @JoinColumn(name = "status_id", referencedColumnName = "id"))
+    private Set<Status> status;
+
 }
