@@ -13,6 +13,6 @@ import java.util.UUID;
  * Date: 9/29/24
  * Time: 11:43 PM
  */
-public interface OrganizationRepository extends JpaRepository<Organization, UUID> {
+public interface OrganizationRepository extends JpaRepository<Organization, Long> {
    Optional<Organization> findByName(String name);
 }

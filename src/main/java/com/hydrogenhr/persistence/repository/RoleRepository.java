@@ -13,6 +13,6 @@ import java.util.UUID;
  * Date: 9/29/24
  * Time: 11:21 PM
  */
-public interface RoleRepository extends JpaRepository<Role, UUID> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(String name);
 }

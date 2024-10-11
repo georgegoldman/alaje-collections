@@ -2,9 +2,9 @@ package com.hydrogenhr.service;
 
 import com.hydrogenhr.persistence.entity.User;
 
+import java.lang.Long;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserService {
     Optional<User> getUserByUsername(String username);
@@ -17,7 +17,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    void deleteUser(UUID id);
+    void deleteUser(Long id);
 
-    User updateUser(UUID id, User updatedUser);
+    User updateUser(Long id, User updatedUser);
 }

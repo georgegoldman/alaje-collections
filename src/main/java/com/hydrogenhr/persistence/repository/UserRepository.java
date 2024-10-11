@@ -13,7 +13,7 @@ import java.util.UUID;
  * Date: 9/29/24
  * Time: 11:22 PM
  */
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
 
