@@ -31,7 +31,7 @@ public class CustomPrincipal extends org.springframework.security.core.userdetai
     private final String lastName;
     private final String username;
     private final String email;
-    private final String telephone;
+    private final String mobileNumber;
     private final Boolean passwordReset;
     private final String fullName;
     private final boolean isAdmin;
@@ -50,7 +50,7 @@ public class CustomPrincipal extends org.springframework.security.core.userdetai
         this.firstName = user.getFirstName();
         this.middleName = user.getMiddleName();
         this.lastName = user.getLastName();
-        this.telephone = user.getTelephone();
+        this.mobileNumber = user.getMobileNumber();
         this.email = user.getEmail();
         this.isAdmin = user.isAdmin();
         this.isUsing2FA = user.isUsing2FA();

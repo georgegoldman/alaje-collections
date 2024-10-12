@@ -155,14 +155,14 @@ public class DefaultInstaller implements ApplicationListener<ContextRefreshedEve
     }
 
     private User createUserIfNotExist(String username, String password, String firstName, String lastName, String email,
-                                      String telephone, Set<Role> roles, Organization organization, boolean isAdmin, Country country) {
+                                      String mobileNumber, Set<Role> roles, Organization organization, boolean isAdmin, Country country) {
         return userRepository.findByUsername(username).orElseGet(() -> userRepository.save(User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .firstName(firstName)
                 .lastName(lastName)
                 .email(email)
-                .telephone(telephone)
+                .mobileNumber(mobileNumber)
                 .roles(roles)
                 .organization(organization)
                 .secret(SecretKeyGenerator.generateSecretKey())

@@ -1,18 +1,16 @@
 package com.hydrogenhr.resource;
 
+import com.hydrogenhr.model.exceptions.UserRegistrationValidator;
 import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/dev")
@@ -43,8 +41,9 @@ public class UserController {
     }
 
     @PostMapping("/user/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User newUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User userRequest){
+        UserRegistrationValidator.validate(userRequest);
+        User newUser = userService.createUser(userRequest);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 

@@ -197,7 +197,7 @@ public class AuthorizationServerConfig {
                         .claim("username", user.getUsername())
                         .claim("email", user.getEmail())
                         .claim("status", user.getStatus())
-                        .claim("telephone", user.getTelephone())
+                        .claim("mobileNumber", user.getMobileNumber())
                         .claim("passwordReset", user.getPasswordReset())
                         .claim("isAdmin", user.isAdmin())
                         .claim("isUsing2FA", user.isUsing2FA())

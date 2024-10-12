@@ -53,9 +53,9 @@ public class User extends BaseEntity {
     @Email(message = "Please provide a valid email address")
     private String email;
 
-    @Column(name = "telephone", length = 16)
-    @Size(min = 7, max = 16, message = "Telephone number cannot be less than 7 characters and more than 16 characters long")
-    private String telephone;
+    @Column(name = "mobile_number", length = 16, nullable = true)
+    @Size(min = 7, max = 16, message = "Mobile number cannot be less than 7 characters and more than 16 characters long")
+    private String mobileNumber;
 
     @JsonIgnore
     @Column(name = "secret", length = 150)
