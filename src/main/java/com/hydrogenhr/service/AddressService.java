@@ -2,6 +2,7 @@ package com.hydrogenhr.service;
 
 import java.util.*;
 
+import com.hydrogenhr.model.dto.AddressDTO;
 import com.hydrogenhr.persistence.entity.Address;
 
 public interface AddressService {
@@ -11,7 +12,7 @@ public interface AddressService {
 
     Address createAddress(Address address);
 
-    Address updateAddress(Long id, Address updatedAddress);
+    Address updateAddress(Long id, AddressDTO updatedAddress);
 
     void deleteAddress(Long id);
 }

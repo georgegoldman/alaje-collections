@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.hydrogenhr.model.dto.AddressDTO;
 import com.hydrogenhr.persistence.entity.Address;
 import com.hydrogenhr.persistence.repository.AddressRepository;
 import com.hydrogenhr.service.AddressService;
@@ -34,7 +35,7 @@ public class AddressServiceImpl implements AddressService {
     
 
     @Override
-    public Address updateAddress(Long id, Address updatedAddress) {
+    public Address updateAddress(Long id, AddressDTO updatedAddress) {
         return addressRepository.findById(id).map(address -> {
             address.setBuildingName(updatedAddress.getBuildingName());
             address.setStreetNumber(updatedAddress.getStreetNumber());
