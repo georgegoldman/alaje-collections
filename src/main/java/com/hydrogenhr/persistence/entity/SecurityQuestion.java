@@ -1,13 +1,15 @@
 package com.hydrogenhr.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import jakarta.persistence.*;
+
+import java.util.UUID;
+import java.util.List;
 
 @Entity(name = "SecurityQuestion")
 @Table(name = "security_question")
@@ -16,10 +18,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class SecurityQuestion extends BaseEntity{
+public class SecurityQuestion{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "question")
     private String question;
 
+    // One security question can have many answers
     
 }

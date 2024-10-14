@@ -1,5 +1,7 @@
 package com.hydrogenhr.persistence.entity;
 
+import com.google.common.base.Optional;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,8 +21,8 @@ public class SQAnswer extends BaseEntity{
     @Column(name = "answer")
     private String answer;
 
-    @JoinColumn(name = "user_fk")
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_fk")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)

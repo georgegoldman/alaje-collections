@@ -20,4 +20,6 @@ public interface UserService {
     void deleteUser(Long id);
 
     User updateUser(Long id, User updatedUser);
+
+    Optional<User> getUserById(Long id);
 }

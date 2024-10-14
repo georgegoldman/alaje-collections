@@ -15,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,7 +34,7 @@ import java.util.Set;
 @SuperBuilder
 public class User extends BaseEntity {
 
-    @Column(name = "username", length = 100, unique = true, updatable = false)
+    @Column(name = "username", length = 100, unique = true, updatable = true)
     private String username;
 
     @Column(name = "password", columnDefinition = "text")
@@ -67,7 +68,13 @@ public class User extends BaseEntity {
     @Column(name = "password_reset", length = 1)
     private boolean passwordReset;
 
+    @Column
     private LocalDate dateOfBirth;
+
+    @Column(name = "age")
+    private int age;
+
+
 
     @Column(name = "is_admin", length = 1)
     private boolean isAdmin;
@@ -100,6 +107,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns =
     @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
 
 
 }

@@ -64,4 +64,9 @@ public class UserController {
         return  new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
     }
 
+    public Optional<User> getUserById(@PathVariable Long id){
+        return userService.getUserById(id);
+        
+    }
+
 }
