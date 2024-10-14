@@ -33,18 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-    @Override
-    public Invoice updateInvoice(Long id, Invoice updatedInvoice) {
-        return invoiceRepository.findById(id).map(invoice -> {
-            invoice.setAmountDue(updatedInvoice.getAmountDue());
-            invoice.setRevenueSetup(updatedInvoice.getRevenueSetup());
-            return invoiceRepository.save(invoice);
-        }).orElseThrow(() -> new RuntimeException("Invoice not found with id " + id));
-    }
 
-    @Override
-    public void deleteInvoice(Long id) {
-        invoiceRepository.deleteById(id);
-    }
+
 
 }
