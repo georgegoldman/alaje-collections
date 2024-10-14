@@ -4,12 +4,10 @@ import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.persistence.repository.UserRepository;
 import com.hydrogenhr.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
