@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name = "AlajeFixedUserCharges")
+@Entity(name = "FixedCharges")
 @Table(name = "fixed_charges")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class AlajeFixedUserCharges extends BaseEntity{
+public class FixedCharges extends BaseEntity{
 
     @Column(name = "charge_type", nullable = false)
     @Enumerated(EnumType.STRING)

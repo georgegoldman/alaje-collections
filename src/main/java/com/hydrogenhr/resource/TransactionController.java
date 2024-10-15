@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hydrogenhr.model.dto.TransactionDTo;
 import com.hydrogenhr.persistence.entity.Transaction;
 import com.hydrogenhr.persistence.entity.User;
-import com.hydrogenhr.persistence.repository.UserRepository;
 import com.hydrogenhr.service.TransactionService;
 
 import com.hydrogenhr.model.enums.TransactionStatus;
@@ -70,6 +69,6 @@ public class TransactionController  {
         Transaction transaction = transactionService.createTransaction(newTransaction);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-        .body(transaction);
+        .body(transaction); 
     }
 }

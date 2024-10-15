@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hydrogenhr.persistence.entity.AlajeFixedUserCharges;
-import com.hydrogenhr.service.AlajeFixedUserChargesService;
+import com.hydrogenhr.persistence.entity.FixedCharges;
+import com.hydrogenhr.service.FixedChargesService;
 
 
 
@@ -22,25 +22,25 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/dev/fix-charges")
 @RequiredArgsConstructor
-public class AlajeFixedUserChargesController {
+public class FixedChargesController {
 
-    private final AlajeFixedUserChargesService alajeFixedUserChargesService;
+    private final FixedChargesService alajeFixedUserChargesService;
 
     @GetMapping
-    public List<AlajeFixedUserCharges> getAlajeFixedUserCharges(){
+    public List<FixedCharges> getAlajeFixedUserCharges(){
         return alajeFixedUserChargesService.getAllAlajeFixedUserCharges();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlajeFixedUserCharges> getAlageFixedUserCharges(@PathVariable Long id){
-        Optional<AlajeFixedUserCharges> alajeFixedUserCharges = alajeFixedUserChargesService.getAlajeFixedUserCharges(id);
+    public ResponseEntity<FixedCharges> getAlageFixedUserCharges(@PathVariable Long id){
+        Optional<FixedCharges> alajeFixedUserCharges = alajeFixedUserChargesService.getAlajeFixedUserCharges(id);
 
         return alajeFixedUserCharges.map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public AlajeFixedUserCharges createAlajeFixedUserCharges(@RequestBody AlajeFixedUserCharges alajeFixedUserCharges){
+    public FixedCharges createAlajeFixedUserCharges(@RequestBody FixedCharges alajeFixedUserCharges){
         return alajeFixedUserChargesService.creatAlajeFixedUserCharges(alajeFixedUserCharges);
     }
 
