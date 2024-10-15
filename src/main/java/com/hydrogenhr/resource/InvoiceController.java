@@ -36,7 +36,6 @@ public class InvoiceController {
         return invoice.map(ResponseEntity::ok)
                       .orElse(ResponseEntity.notFound().build());
     }
-
     // Create a new invoice
     @PostMapping
     public Invoice createInvoice(@RequestBody Invoice invoice) {

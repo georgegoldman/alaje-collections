@@ -32,4 +32,9 @@ public class AlajeFixedUserChargesServiceImpl implements AlajeFixedUserChargesSe
         return alajeFixedUserChargesRepository.save(alajeFixedUserCharges);
     }
 
+    @Override
+    public void deletAlajeFixedUserCharges(Long id) {
+         alajeFixedUserChargesRepository.deleteById(id);
+    }
+
 }

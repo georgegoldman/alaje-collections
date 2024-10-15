@@ -2,9 +2,19 @@ package com.hydrogenhr.persistence.entity;
 
 import com.hydrogenhr.model.enums.ChargeType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity(name = "AlajeFixedUserCharges")
-@Table(name = "alaje_fixed_user_charges")
+@Table(name = "fixed_charges")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 public class AlajeFixedUserCharges extends BaseEntity{
 
     @Column(name = "charge_type", nullable = false)

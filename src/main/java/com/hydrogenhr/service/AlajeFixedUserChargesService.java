@@ -12,4 +12,6 @@ public interface AlajeFixedUserChargesService {
 
     AlajeFixedUserCharges creatAlajeFixedUserCharges(AlajeFixedUserCharges alajeFixedUserCharges);
 
+    void deletAlajeFixedUserCharges(Long id);
+
 }

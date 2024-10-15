@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dev")
+@RequestMapping("/dev/user")
 @RequiredArgsConstructor
 @Tag(name = "User endpoint")
 public class UserController {
@@ -22,17 +22,17 @@ public class UserController {
 
 
 
-    @GetMapping("/user/username/{username}")
+    @GetMapping("/username/{username}")
     public Optional<User> getUserByUsername(@PathVariable String username){
         return userService.getUserByUsername(username);
     }
 
-    @GetMapping("/user/email/{email}")
+    @GetMapping("/email/{email}")
     public Optional<User> getUserByEmail(@PathVariable String email){
         return userService.getUserByEmail(email);
     }
 
-    @GetMapping("/user/username-or-email")
+    @GetMapping("/username-or-email")
     public Optional<User> getUserByUsernameOrEmail(@RequestParam(required = false) String username, @RequestParam(required = false) String email){
         if (username == null && email == null){
             throw new IllegalArgumentException("At least one of 'username' or 'email' must be provided.");
@@ -40,30 +40,31 @@ public class UserController {
         return userService.getUserByUsernameOrEmail(username, email);
     }
 
-    @PostMapping("/user/create")
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User userRequest){
         UserRegistrationValidator.validate(userRequest);
         User newUser = userService.createUser(userRequest);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public  ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser){
         return  new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable Long id){
         return userService.getUserById(id);
         
