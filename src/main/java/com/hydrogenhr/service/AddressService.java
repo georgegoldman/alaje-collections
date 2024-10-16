@@ -10,7 +10,7 @@ public interface AddressService {
 
     Optional<Address> getAddressById(Long id);
 
-    Address createAddress(Address address);
+    Address createAddress(AddressDTO address);
 
     Address updateAddress(Long id, AddressDTO updatedAddress);
 

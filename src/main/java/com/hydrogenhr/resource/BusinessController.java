@@ -49,44 +49,8 @@ public class BusinessController {
     // Create a new business
     @PostMapping
     public ResponseEntity<Business> createBusiness(@Valid @RequestBody BusinessDTO businessDTO) {
-        Optional<User> user = userController.getUserById(businessDTO.getUserId());
-
-        if (user.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(null);
-        }
-
-        ResponseEntity<Address> address = addressController.getAddressById(businessDTO.getAddressId());
-
-        // Fetch the address and check if it exists
-        if (!address.getStatusCode().is2xxSuccessful() || address.getBody() == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(null);
-        }
-        
-        
-        // Convert the business type from String to Enum
-        BusinessType businessType;
-        try{
-            businessType = BusinessType.valueOf(businessDTO.getBusinessType().toUpperCase());
-        } catch (IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(null);
-        }
-
-        Business business = Business.builder()
-        .businessType(businessType)
-        .businessDescription(businessDTO.getBusinessDescription())
-        .user(user.get())
-        .address(address.getBody())
-        .build();
-            
-            
-        // Save the business and return the created entity with 201 status code
-        Business createdBusiness = businessService.createBusiness(business);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-        .body(createdBusiness);
+        Business business = businessService.createBusiness(businessDTO);
+        return new ResponseEntity<>(business, HttpStatus.CREATED);
     }
 
     // Update an existing business

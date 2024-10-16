@@ -3,7 +3,7 @@ package com.hydrogenhr.service;
 import java.util.List;
 import java.util.Optional;
 
-
+import com.hydrogenhr.model.dto.BusinessDTO;
 import com.hydrogenhr.persistence.entity.Business;
 
 public interface BusinessService {
@@ -12,7 +12,7 @@ public interface BusinessService {
 
     Optional<Business> getBusinessById(Long id);
 
-    Business createBusiness(Business business);
+    Business createBusiness(BusinessDTO business);
 
     Business updateBusiness(Long id, Business updatedBusiness);
 

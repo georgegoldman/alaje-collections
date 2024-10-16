@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class AddressController {
     
     private final AddressService addressService;
-    private final UserController userController;
 
     // Get all addresses
     @GetMapping
@@ -45,27 +44,9 @@ public class AddressController {
 
     // Create a new address
     @PostMapping
-    public Address createAddress(@Valid @RequestBody AddressDTO address) {
+    public Address createAddress(@Valid @RequestBody AddressDTO addressDTO) {
 
-
-        Optional<User> user  = userController.getUserById(address.getUserId());
-
-        Address newAddress = Address.builder()
-                .buildingName(address.getBuildingName())
-                .streetNumber(address.getStreetNumber())
-                .zipCode(address.getZipCode())
-                .streetName(address.getStreetName())
-                .landmark(address.getLandmark())
-                .description(address.getDescription())
-                .city(address.getCity())
-                .lga(address.getLga())
-                .state(address.getState())
-                .country(address.getCountry())
-                .user(user.get())  // Set the user object on the address
-                .build();
-
-
-        return addressService.createAddress(newAddress);
+        return addressService.createAddress(addressDTO);
     }
 
     // Update an existing address

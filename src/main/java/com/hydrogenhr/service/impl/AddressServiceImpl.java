@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.hydrogenhr.model.dto.AddressDTO;
 import com.hydrogenhr.persistence.entity.Address;
+import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.persistence.repository.AddressRepository;
 import com.hydrogenhr.service.AddressService;
+import com.hydrogenhr.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository  addressRepository;
+    private final UserService userService;
 
     @Override
     public List<Address> getAllAddresses() {
@@ -29,8 +32,23 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address createAddress(Address address) {
-        return addressRepository.save(address);
+    public Address createAddress(AddressDTO addressDTO) {
+        Optional<User> user  = userService.getUserById(addressDTO.getUserId());
+
+        Address newAddress = Address.builder()
+                .buildingName(addressDTO.getBuildingName())
+                .streetNumber(addressDTO.getStreetNumber())
+                .zipCode(addressDTO.getZipCode())
+                .streetName(addressDTO.getStreetName())
+                .landmark(addressDTO.getLandmark())
+                .description(addressDTO.getDescription())
+                .city(addressDTO.getCity())
+                .lga(addressDTO.getLga())
+                .state(addressDTO.getState())
+                .country(addressDTO.getCountry())
+                .user(user.get())  // Set the user object on the address
+                .build();
+        return addressRepository.save(newAddress);
     }
     
 
