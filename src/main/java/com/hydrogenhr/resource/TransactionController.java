@@ -11,15 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hydrogenhr.model.dto.TransactionDTo;
 import com.hydrogenhr.persistence.entity.Transaction;
-import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.service.TransactionService;
-
-import com.hydrogenhr.model.enums.TransactionStatus;
-
 
 import lombok.RequiredArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
@@ -28,7 +23,6 @@ import java.util.*;
 public class TransactionController  {
 
     private final TransactionService transactionService;
-    private final UserController userController;
 
     @GetMapping
     public List<Transaction> getAlltransactions() {

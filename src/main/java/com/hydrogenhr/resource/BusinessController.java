@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hydrogenhr.model.dto.BusinessDTO;
-import com.hydrogenhr.model.enums.BusinessType;
-import com.hydrogenhr.persistence.entity.Address;
 import com.hydrogenhr.persistence.entity.Business;
-import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.service.BusinessService;
 
 
@@ -29,8 +26,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BusinessController {
     private final BusinessService businessService;
-    private final UserController userController;
-    private final AddressController addressController;
 
     // Get all businesses
     @GetMapping

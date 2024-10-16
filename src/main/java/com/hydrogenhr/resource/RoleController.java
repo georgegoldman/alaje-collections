@@ -1,7 +1,6 @@
 package com.hydrogenhr.resource;
 
 import com.hydrogenhr.persistence.entity.Role;
-import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.service.RoleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
