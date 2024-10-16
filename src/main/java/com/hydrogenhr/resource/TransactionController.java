@@ -37,38 +37,18 @@ public class TransactionController  {
 
     @GetMapping("/{id}")
     public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id){
-        Optional <Transaction> transaction = transactionService.getInvoiceById(id);
+        Optional <Transaction> transaction = transactionService.getTransactionById(id);
 
         return transaction.map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
     }
 
+    
+
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTo transactionDTo){
-        Optional<User> user = userController.getUserById(transactionDTo.getUserId());
+        Transaction transaction = transactionService.createTransaction(transactionDTo);
 
-        if (user.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(null);
-        }
-        TransactionStatus transactionStatus;
-        try{
-            transactionStatus = TransactionStatus.valueOf(transactionDTo.getTransactionStatus().toUpperCase());
-        }catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(null);
-        }
-        Transaction newTransaction = Transaction.builder()
-        .transactionStatus(transactionStatus)
-        .alajeFixedUserCharge(BigDecimal.valueOf(transactionDTo.getAlajeFixedUserCharge()))
-        .payableAmount(transactionDTo.getPayableAmount())
-        .totalAmount(transactionDTo.getTotalAmount())
-        .user(user.get())
-        .build();
-        
-        Transaction transaction = transactionService.createTransaction(newTransaction);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-        .body(transaction); 
+        return new ResponseEntity<>(transaction, HttpStatus.CREATED);
     }
 }

@@ -6,9 +6,12 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.hydrogenhr.model.dto.InvoiceDTO;
 import com.hydrogenhr.persistence.entity.Invoice;
+import com.hydrogenhr.persistence.entity.RevenueSetup;
 import com.hydrogenhr.persistence.repository.InvoiceRepository;
 import com.hydrogenhr.service.InvoiceService;
+import com.hydrogenhr.service.RevenueSetupService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
+    private final RevenueSetupService revenueSetupService;
     
     @Override
     public List<Invoice> getAllInvoices() {
@@ -29,7 +33,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Invoice createInvoice(Invoice invoice) {
+    public Invoice createInvoice(InvoiceDTO invoiceDTO) {
+        Optional<RevenueSetup> revenueSetup = revenueSetupService.getRevenueSetupById(invoiceDTO.getRevenueSetupId());
+
+        Invoice invoice = Invoice.builder()
+        .amountDue(invoiceDTO.getAmountDue())
+        .revenueSetup(revenueSetup.get())
+        .build();
         return invoiceRepository.save(invoice);
     }
 

@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class Invoice extends BaseEntity {
 
     @Column(name = "amount_due")
-    private BigDecimal amountDue;
+    private double amountDue;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "revenue_setup")

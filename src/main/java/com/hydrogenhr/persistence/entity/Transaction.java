@@ -32,6 +32,10 @@ public class Transaction extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "invoice_fk")
+    private Invoice invoice;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_fk")
     private User user;

@@ -2,15 +2,16 @@ package com.hydrogenhr.service;
 
 import java.util.*;
 
-import com.hydrogenhr.persistence.entity.Invoice;
+import com.hydrogenhr.model.dto.PaymentDTO;
+import com.hydrogenhr.model.dto.TransactionDTo;
 import com.hydrogenhr.persistence.entity.Transaction;
 
 public interface TransactionService {
 
     List<Transaction> getAllTransactions();
 
-    public Optional<Transaction> getInvoiceById(Long id);
+    public Optional<Transaction> getTransactionById(Long id);
 
-    Transaction createTransaction(Transaction transaction);
+    Transaction createTransaction(TransactionDTo transaction);
 
 }

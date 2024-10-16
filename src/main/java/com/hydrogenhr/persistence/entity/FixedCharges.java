@@ -25,10 +25,7 @@ public class FixedCharges extends BaseEntity{
     private int inPercentage;
 
     @Column(name = "flat_rate")
-    private int flatRate;
-
-    @Column(name = "both")
-    private boolean both;
+    private Double flatRate;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "transaction_fk")

@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class InvoiceController {
     private final InvoiceService invoiceService;
-    private final RevenueSetupController revenueSetupController;
 
     // Get all invoices
     @GetMapping
@@ -45,24 +44,8 @@ public class InvoiceController {
     // Create a new invoice
     @PostMapping
     public ResponseEntity<Invoice> createInvoice(@RequestBody InvoiceDTO invoiceDTO) {
-        ResponseEntity<RevenueSetup> revenue = revenueSetupController.getRevenueSetupById(invoiceDTO.getRevenueSetupId());
-
-        if (!revenue.getStatusCode().is2xxSuccessful() || revenue.getBody() == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(null);
-        }
-
-
-
-        Invoice newInvoice = Invoice.builder()
-        .amountDue(invoiceDTO.getAmountDue())
-        .revenueSetup(revenue.getBody())
-        .build();
-
-        Invoice invoice2 = invoiceService.createInvoice(newInvoice);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-        .body(invoice2);
+        Invoice invoice = invoiceService.createInvoice(invoiceDTO);
+        return new ResponseEntity<>(invoice, HttpStatus.CREATED);
     }
 
 
