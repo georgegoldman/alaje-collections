@@ -14,8 +14,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDate; 
 import java.util.Set;
 
 /**

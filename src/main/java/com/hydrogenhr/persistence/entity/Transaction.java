@@ -39,4 +39,8 @@ public class Transaction extends BaseEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_fk")
     private User user;
+
+    @JoinColumn(name = "transaction_detail_fk")
+    @OneToOne(fetch = FetchType.EAGER)
+    private TransactionDetail transactionDetail;
 }
