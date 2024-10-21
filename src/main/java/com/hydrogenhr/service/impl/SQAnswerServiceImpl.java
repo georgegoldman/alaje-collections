@@ -1,8 +1,5 @@
 package com.hydrogenhr.service.impl;
 
-import org.hibernate.query.IllegalQueryOperationException;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.hydrogenhr.model.dto.SQAnswerDTO;
@@ -10,13 +7,10 @@ import com.hydrogenhr.persistence.entity.SQAnswer;
 import com.hydrogenhr.persistence.entity.SecurityQuestion;
 import com.hydrogenhr.persistence.entity.User;
 import com.hydrogenhr.persistence.repository.SQAnswerRepository;
-import com.hydrogenhr.persistence.repository.SecurityQuestionRepository;
 import com.hydrogenhr.persistence.repository.UserRepository;
 import com.hydrogenhr.resource.UserController;
 import com.hydrogenhr.service.SQAnswerService;
 import com.hydrogenhr.service.SecurityQuestionService;
-import com.hydrogenhr.service.UserService;
-
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;

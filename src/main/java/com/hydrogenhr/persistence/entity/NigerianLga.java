@@ -28,7 +28,7 @@ public class NigerianLga extends BaseEntity {
     @Column(name = "lga")
     private String lga;
 
-    @Column(name = "approval_status")
+    @Column(name = "lga_approval_status")
     @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus;
 

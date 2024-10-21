@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/dev/user-approval")
 public class UserApprovalController {
-
+    
 }

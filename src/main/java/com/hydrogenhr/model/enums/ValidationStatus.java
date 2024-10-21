@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum ValidationStatus {
 
     VALID('0'),
-    INVALID('1');
+    INVALID('1'),
+    PENDING('2');
 
     private final Character validationStatus;
 }

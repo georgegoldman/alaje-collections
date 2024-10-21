@@ -8,6 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/dev/lga")
 @RestController
 @RequiredArgsConstructor
-public class NigerianLgaRepository {
+public class NigerianLgaController {
 
 }

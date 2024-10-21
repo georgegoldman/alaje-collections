@@ -35,3 +35,6 @@ vault.setting.json
 .mvn/
 mvnw.cmd
 mvnw
+
+# environment variable
+.env

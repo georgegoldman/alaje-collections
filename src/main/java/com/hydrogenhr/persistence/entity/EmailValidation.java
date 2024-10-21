@@ -2,8 +2,9 @@ package com.hydrogenhr.persistence.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hydrogenhr.model.enums.ValidationStatus;
 import com.hydrogenhr.model.enums.ValidationType;
 
@@ -14,6 +15,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,16 +53,23 @@ public class EmailValidation extends BaseEntity {
     private ValidationType validationType;
 
     @Column(name = "activation_initiated")
-    @JsonIgnore
+    @CreatedDate
     private LocalDateTime activationInitiated;
 
     @Column(name = "confirnmed_at")
-    @JsonIgnore
     private LocalDateTime confirmedAt;
 
     @JoinColumn(name = "user_fk")
     @OneToOne(fetch = FetchType.EAGER)
     private User user;
+
+    // Method to automatically update confirmedAt when validationStatus is set to valid
+    @PreUpdate
+    public void preUpdate() {
+        if (this.validationStatus == ValidationStatus.VALID){
+            this.confirmedAt = LocalDateTime.now();
+        }
+    }
 
 
 }
